@@ -132,9 +132,12 @@ function rndMyth() {
   delete mythCopy.div;
 
   const { h2, img } = htmlElMyth(mythCopy);
+  const timestamp = document.createElement('span');
   const mythDiv = document.createElement('div');
 
-  mythDiv.append(h2, img);
+  timestamp.innerText = (new Date()).toISOString();
+
+  mythDiv.append(h2, img, timestamp);
 
   myth.div.remove();
 
