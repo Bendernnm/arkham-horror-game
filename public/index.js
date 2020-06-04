@@ -98,11 +98,13 @@ function addMyth(myth) {
   addMyth2Pull(mythCopy);
 }
 
-function htmlElMyth(myth) {
+function htmlElMyth(myth, index) {
   const h2 = document.createElement('h2');
   const img = document.createElement('img');
 
-  h2.innerText = myth.name;
+  h2.innerText = typeof index === 'number'
+      ? `${myth.name} (${index})`
+      : myth.name;
 
   img.setAttribute('weight', '50');
   img.setAttribute('height', '50');
@@ -145,10 +147,10 @@ function rndMyth() {
 function showBasicMyths() {
   const $mythsList = document.getElementById('myths-list');
 
-  myths.forEach((myth) => {
+  myths.forEach((myth, index) => {
     const div = document.createElement('div');
     const add = document.createElement('button');
-    const { h2, img } = htmlElMyth(myth);
+    const { h2, img } = htmlElMyth(myth, index);
 
     add.innerText = 'Додати';
     add.addEventListener('click', (e) => {
@@ -185,6 +187,17 @@ function init() {
   attachMove2PullEvent();
 }
 
+const defaultTokens = [1, 1, 1, 2, 2, 3, 3, 0, 0, 4, 5, 6, 6, 6];
+
+function defaultScenario() {
+  if (!defaultTokens.length) {
+    return;
+  }
+
+  defaultTokens.forEach(index => addMyth(myths[index]));
+}
+
 window.onload = function() {
   init();
+  defaultScenario();
 };
