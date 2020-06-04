@@ -173,9 +173,16 @@ function attachRndEvent() {
   });
 }
 
+function attachMove2PullEvent() {
+  const btn = document.getElementById('added-myths-move2pull');
+
+  btn.addEventListener('click', () => addedMyths.forEach(addMyth2Pull));
+}
+
 function init() {
   showBasicMyths();
   attachRndEvent();
+  attachMove2PullEvent();
 }
 
 window.onload = function() {
