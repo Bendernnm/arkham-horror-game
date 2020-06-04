@@ -122,7 +122,7 @@ function rndMyth() {
 
   const $rndDiv = document.getElementById('rnd-myths');
 
-  const index = randomInteger(0, mythsPull.length);
+  const index = randomInteger(0, mythsPull.length - 1);
 
   const myth = mythsPull[index];
   const mythCopy = { ...myth };
