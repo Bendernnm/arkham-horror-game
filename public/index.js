@@ -39,6 +39,8 @@ function addMyth2Pull(myth) {
   const remove = document.createElement('button');
   const { h2, img } = htmlElMyth(mythCopy);
 
+  mythCopy.div = mythDiv;
+
   remove.innerText = 'Видалити з пуллу';
   remove.addEventListener('click', (e) => {
     e.preventDefault();
@@ -109,6 +111,37 @@ function htmlElMyth(myth) {
   return { h2, img };
 }
 
+function randomInteger(min, max) {
+  return Math.round(min - 0.5 + Math.random() * (max - min + 1));
+}
+
+function rndMyth() {
+  if (!mythsPull.length) {
+    return;
+  }
+
+  const $rndDiv = document.getElementById('rnd-myths');
+
+  const index = randomInteger(0, mythsPull.length);
+
+  const myth = mythsPull[index];
+  const mythCopy = { ...myth };
+
+  delete mythCopy.div;
+
+  const { h2, img } = htmlElMyth(mythCopy);
+  const mythDiv = document.createElement('div');
+
+  mythDiv.append(h2, img);
+
+  myth.div.remove();
+
+  $rndDiv.append(mythDiv);
+  randomMyths.push(mythCopy);
+
+  mythsPull.splice(index, 1);
+}
+
 function showBasicMyths() {
   const $mythsList = document.getElementById('myths-list');
 
@@ -130,10 +163,20 @@ function showBasicMyths() {
   });
 }
 
-function init() {
-  showBasicMyths();
+function attachRndEvent() {
+  const rnd = document.getElementById('rnd-myth');
+
+  rnd.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    rndMyth();
+  });
 }
 
+function init() {
+  showBasicMyths();
+  attachRndEvent();
+}
 
 window.onload = function() {
   init();
