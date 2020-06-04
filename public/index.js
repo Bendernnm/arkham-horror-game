@@ -138,7 +138,7 @@ function rndMyth() {
 
   myth.div.remove();
 
-  $rndDiv.append(mythDiv);
+  $rndDiv.prepend(mythDiv);
   randomMyths.push(mythCopy);
 
   mythsPull.splice(index, 1);
